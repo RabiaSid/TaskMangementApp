@@ -3,13 +3,17 @@ import database from '@react-native-firebase/database';
 
 export let fbSignUp = (body: any) => {
   return new Promise((resolve, reject) => {
-    if (!body.email || !body.password) {
-      reject('Email and Password are Required');
+    if (!body.email) {
+      reject('Email  are Required');
+      return;
+    }
+    if (!body.password) {
+      reject(' Password are Required');
+      return;
     } else {
       auth()
         .createUserWithEmailAndPassword(body.email, body.password)
         .then(res => {
-          console.log('User account created & signed in!');
           let id = res.user.uid;
 
           body.id = id;
@@ -24,14 +28,7 @@ export let fbSignUp = (body: any) => {
             });
         })
         .catch(error => {
-          if (error.code === 'auth/email-already-in-use') {
-            console.log('That email address is already in use!');
-          }
-
-          if (error.code === 'auth/invalid-email') {
-            console.log('That email address is invalid!');
-          }
-          console.error(error);
+          reject(error);
         });
     }
   });
@@ -39,8 +36,13 @@ export let fbSignUp = (body: any) => {
 
 export let fbLogin = (body: any) => {
   return new Promise((resolve, reject) => {
-    if (!body.email || !body.password) {
-      reject('Email and Password is Required');
+    if (!body.email) {
+      reject('Email  are Required');
+      return;
+    }
+    if (!body.password) {
+      reject(' Password are Required');
+      return;
     } else {
       auth()
         .signInWithEmailAndPassword(body.email, body.password)
@@ -48,7 +50,7 @@ export let fbLogin = (body: any) => {
           let id = res.user.uid;
           database()
             .ref(`users/${id}`)
-            .on('value', data => {
+            .once('value', data => {
               if (data.exists()) {
                 resolve(data.val());
               } else {
@@ -56,12 +58,76 @@ export let fbLogin = (body: any) => {
               }
             });
         })
-        .catch(err => {});
+        .catch(err => {
+          reject(err);
+        });
     }
   });
 };
 
-export let fbAdd = (nodeName: string, id?: string) => {};
+export let fbAuth = () => {};
+
+export let fbSignout = () => {
+  auth()
+    .signOut()
+    .then(() => console.log('User signed out!'));
+  // return signOut(auth);
+};
+
+export let fbAdd = (nodeName: string, body?: any) => {
+  return new Promise((resolve, reject) => {
+    body.id = database().ref(nodeName).push().key;
+    database()
+      .ref(`${nodeName}/${body.id}`)
+      .set(body)
+      .then(() => {
+        resolve(body);
+      });
+  });
+};
+
+export let fbGet = (nodeName: string, id?: any) => {
+  return new Promise((resolve, reject) => {
+    database()
+      .ref(`${nodeName}/${id ? id : ''}`)
+      .once('value', data => {
+        if (data.exists()) {
+          resolve(Object.values(data.val()));
+        } else {
+          reject('No Data Found');
+        }
+      });
+  });
+};
+
+export let fbEdit = (nodeName: string, id?: any, body?: any) => {
+  return new Promise((resolve, reject) => {
+    database()
+      .ref(`${nodeName}/${id ? id : ''}`)
+      .set(body)
+      .then(() => {
+        resolve(body);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+export let fbDelete = (nodeName: string, id?: any) => {
+  return new Promise((resolve, reject) => {
+    database()
+      .ref(`${nodeName}/${id ? id : ''}`)
+      .remove()
+      .then(res => {
+        resolve('Data Delete Successfully');
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 // import {
 //   getAuth,
 //   createUserWithEmailAndPassword,
