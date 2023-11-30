@@ -1,12 +1,10 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import ProductHome from '../../screens/product-screen';
-import ProductDetail from '../../screens/product-screen/product-detail';
 import Login from '../../screens/auth/sign-in';
 import SignUp from '../../screens/auth/sign-up';
 import CreateTask from '../../screens/create-task';
 import Task from '../../screens/task';
-import TaskHome from '../../screens/task-home';
+import AppHome from '../../screens/app-home';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,8 +17,8 @@ function StackNavigation() {
       //   }}
     >
       <Stack.Screen
-        name="TaskHome"
-        component={TaskHome}
+        name="AppHome"
+        component={AppHome}
       />
       <Stack.Screen
         name="Task"
@@ -44,20 +42,7 @@ function StackNavigation() {
         name="Login"
         component={Login}
       />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="ProductHome"
-        component={ProductHome}
-      />
-      <Stack.Screen
-        options={{
-         title:'Product Item',
-        }}
-        name="ProductDetail"
-        component={ProductDetail}
-      />
+      
     </Stack.Navigator>
   );
 }

@@ -3,7 +3,7 @@ import {View} from 'react-native';
 
 import PrimaryButton from '../../components/button';
 
-export default function TaskHome({navigation}: any) {
+export default function AppHome({navigation}: any) {
   return (
     <View>
         <View style={[]}>
