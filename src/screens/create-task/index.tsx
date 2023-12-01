@@ -1,30 +1,39 @@
 import React, {useState} from 'react';
-import {Text} from 'react-native';
-import {View} from 'react-native';
-import InputField from '../../components/input';
+import {View, ToastAndroid} from 'react-native';
 import rncStyles from 'rncstyles';
-import Button from '../../components/button';
 import PrimaryButton from '../../components/button';
+import TextInputField from '../../components/text-input';
+import {fbAdd} from '../../config/firebase/firebase-methods';
 
 export default function CreateTask() {
   const [model, setModel] = useState<any>({});
 
+  const SaveTask = () => {
+    setModel({})
+    fbAdd('task', model).then(() => {
+      ToastAndroid.show('Successfully Added Task', ToastAndroid.SHORT);
+    }).catch((err) => {
+      console.log(err)
+    });
+  };
+
   return (
     <View>
       <View style={rncStyles.pb1}>
-        <Text style={[rncStyles.textPrimary, rncStyles.p1]}>Email</Text>
-        <InputField
-          placeholder="eg. Muhammad Zaid"
-          value={model.email}
-          onChangeText={(e: any) => setModel({...model, email: e})}
+        <TextInputField
+          label="Title"
+          placeholder="Add Task Title"
+          value={model.title}
+          onChangeText={(e: any) => setModel({...model, title: e})}
         />
-        <Text style={[rncStyles.textPrimary, rncStyles.p1]}>Email</Text>
-        <InputField
-          placeholder="eg. Muhammad Zaid"
-          value={model.email}
-          onChangeText={(e: any) => setModel({...model, email: e})}
+
+        <TextInputField
+          label="Task"
+          placeholder="Add Task "
+          value={model.task}
+          onChangeText={(e: any) => setModel({...model, task: e})}
         />
-        <PrimaryButton  text="Add Task"/>
+        <PrimaryButton text="Save Task" onPress={SaveTask} />
       </View>
     </View>
   );

@@ -3,17 +3,16 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import rncStyles from 'rncstyles';
 
 export default function PrimaryButton(props: any) {
-  const {onPress, text} = props;
+  const {onPress, text, color} = props;
   return (
     <View style={[rncStyles.p1]}>
       <TouchableOpacity
-        style={[rncStyles.bgInfo, rncStyles.p1, rncStyles.rounded]}>
+        style={color == "info" ? rncStyles.btnInfo : rncStyles.btnPrimary}>
         <Text
           style={[
             rncStyles.textBold,
-            rncStyles.fs5,
-            rncStyles.ms1,
             rncStyles.textWhite,
+            rncStyles.textCenter
           ]}
           onPress={onPress}>
           {text}

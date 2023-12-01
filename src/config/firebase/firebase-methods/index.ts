@@ -82,6 +82,8 @@ export let fbAdd = (nodeName: string, body?: any) => {
       .set(body)
       .then(() => {
         resolve(body);
+      }).catch((err) => {
+        reject(err)
       });
   });
 };

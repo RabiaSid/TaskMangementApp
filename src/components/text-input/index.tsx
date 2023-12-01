@@ -1,11 +1,12 @@
 import React from 'react';
-import {TextInput, View} from 'react-native';
+import {Text, TextInput, View} from 'react-native';
 import rncStyles from 'rncstyles';
 
-export default function InputField(props: any) {
-  const {placeholder, value, onChangeText} = props;
+export default function TextInputField(props: any) {
+  const {placeholder, label, value, onChangeText} = props;
   return (
-    <View style={[rncStyles.p1]}>
+    <View style={[rncStyles.px1]}>
+      <Text style={[rncStyles.textPrimary, rncStyles.p1]}>{label}</Text>
       <TextInput
         style={[
           rncStyles.input,
