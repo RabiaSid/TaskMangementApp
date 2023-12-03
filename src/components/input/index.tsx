@@ -10,11 +10,12 @@ export default function InputField(props: any) {
         style={[
           rncStyles.input,
           rncStyles.bgWhite,
-          rncStyles.rounded,
-          rncStyles.border1,
+          rncStyles.roundedPill,
+          // rncStyles.border1,
           rncStyles.borderPrimary,
           rncStyles.textSecondary,
         ]}
+        placeholderTextColor="#353535"
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}

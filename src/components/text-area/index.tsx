@@ -2,7 +2,7 @@ import React from 'react';
 import {TextInput, View} from 'react-native';
 import rncStyles from 'rncstyles';
 
-export default function InputField(props: any) {
+export default function TextArea(props: any) {
   const {placeholder, value, onChangeText} = props;
   return (
     <View style={[rncStyles.p1]}>

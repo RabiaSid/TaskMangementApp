@@ -5,6 +5,7 @@ import SignUp from '../../screens/auth/sign-up';
 import CreateTask from '../../screens/create-task';
 import Task from '../../screens/task';
 import AppHome from '../../screens/app-home';
+import SingleTask from '../../screens/single-task';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,10 @@ function StackNavigation() {
       <Stack.Screen
         name="CreateTask"
         component={CreateTask}
+      />
+      <Stack.Screen
+        name="SingleTask"
+        component={SingleTask}
       />
       <Stack.Screen
         options={{

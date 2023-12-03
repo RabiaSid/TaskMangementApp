@@ -7,12 +7,18 @@ export default function PrimaryButton(props: any) {
   return (
     <View style={[rncStyles.p1]}>
       <TouchableOpacity
-        style={color == "info" ? rncStyles.btnInfo : rncStyles.btnPrimary}>
+        style={
+          color == 'info'
+            ? rncStyles.btnInfo
+            : color == 'error'
+            ? rncStyles.btnDanger
+            : rncStyles.btnPrimary
+        }>
         <Text
           style={[
             rncStyles.textBold,
             rncStyles.textWhite,
-            rncStyles.textCenter
+            rncStyles.textCenter,
           ]}
           onPress={onPress}>
           {text}
