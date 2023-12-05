@@ -21,13 +21,13 @@ export default function Task({navigation}: any) {
   };
 
   useEffect(() => {
-    // const unsubscribe = navigation.addListener('focus', () => {
-    //   // Screen was focused
-    //   // Do something
-    // });
+    const unsubscribe = navigation.addListener('focus', () => {
+      // Screen was focused
+      // Do something
+      GetTask();
+    });
 
-    // return unsubscribe;
-    GetTask();
+    return unsubscribe;
   }, []);
 
   return (
@@ -84,6 +84,14 @@ export default function Task({navigation}: any) {
                       navigation.navigate('SingleTask', x);
                     }}
                   />
+                  {x.isDone && (
+                    <IconButton
+                      name="check"
+                      onPress={() => {
+                        navigation.navigate('SingleTask', x);
+                      }}
+                    />
+                  )}
                 </View>
               </TaskCard>
             ))}
