@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import PrimaryButton from '../../components/button';
 import rncStyles from 'rncstyles';
 import {Text} from 'react-native';
-import {styles} from '../../../styles';
+import {styles} from '../../styles';
 import {useSelector} from 'react-redux';
 
 export default function AppHome({navigation}: any) {
